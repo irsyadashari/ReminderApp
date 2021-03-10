@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="todoCell" rowHeight="120" id="KGk-i7-Jjw" customClass="ToDoCell" customModule="BlueBirdApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ce-yL-L90" userLabel="TitleLabel">
+                        <rect key="frame" x="12" y="12" width="296" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DD - MM - YYYY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqD-0w-fif" userLabel="DateLabel">
+                        <rect key="frame" x="12" y="31.5" width="296" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="LOREM IPSUM DOLOR SIT AMET DOLORCUS PAQUIATO dolor sit amte basala" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7Y-vr-9Sg" userLabel="DescLabel">
+                        <rect key="frame" x="12" y="51.5" width="296" height="33.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="yqD-0w-fif" firstAttribute="top" secondItem="4Ce-yL-L90" secondAttribute="bottom" id="1V7-7a-qet"/>
+                    <constraint firstItem="4Ce-yL-L90" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="6bn-U6-ox9"/>
+                    <constraint firstItem="l7Y-vr-9Sg" firstAttribute="top" secondItem="yqD-0w-fif" secondAttribute="bottom" constant="8" id="8Qg-W1-rgZ"/>
+                    <constraint firstAttribute="trailing" secondItem="l7Y-vr-9Sg" secondAttribute="trailing" constant="12" id="JJg-y8-iBK"/>
+                    <constraint firstItem="l7Y-vr-9Sg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Lwv-4e-UsN"/>
+                    <constraint firstAttribute="trailing" secondItem="4Ce-yL-L90" secondAttribute="trailing" constant="12" id="aoJ-4H-VpI"/>
+                    <constraint firstItem="4Ce-yL-L90" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="bVW-Ut-gM6"/>
+                    <constraint firstItem="yqD-0w-fif" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="kAX-Yp-Cbf"/>
+                    <constraint firstAttribute="trailing" secondItem="yqD-0w-fif" secondAttribute="trailing" constant="12" id="yPx-UF-150"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="yqD-0w-fif" id="RMx-bq-1qn"/>
+                <outlet property="descLabel" destination="l7Y-vr-9Sg" id="Run-Ew-7Nk"/>
+                <outlet property="titleLabel" destination="4Ce-yL-L90" id="uh7-o3-s9G"/>
+            </connections>
+            <point key="canvasLocation" x="69.565217391304358" y="103.79464285714285"/>
+        </tableViewCell>
+    </objects>
+</document>

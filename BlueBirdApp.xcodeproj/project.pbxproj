@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BFDC48E325F747410096627F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC48E225F747410096627F /* AppDelegate.swift */; };
+		BFDC48E525F747410096627F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC48E425F747410096627F /* SceneDelegate.swift */; };
+		BFDC48EC25F747440096627F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFDC48EB25F747440096627F /* Assets.xcassets */; };
+		BFDC48EF25F747440096627F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFDC48ED25F747440096627F /* LaunchScreen.storyboard */; };
+		BFDC48FB25F748BE0096627F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC48F925F748BE0096627F /* HomeViewController.swift */; };
+		BFDC48FC25F748BE0096627F /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFDC48FA25F748BE0096627F /* HomeViewController.xib */; };
+		BFDC490925F74A010096627F /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC490725F74A010096627F /* ToDoCell.swift */; };
+		BFDC490A25F74A010096627F /* ToDoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFDC490825F74A010096627F /* ToDoCell.xib */; };
+		BFDC490F25F74AB00096627F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = BFDC490E25F74AB00096627F /* Alamofire */; };
+		BFDC491325F74B340096627F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = BFDC491225F74B340096627F /* Moya */; };
+		BFDC491725F74BAC0096627F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BFDC491625F74BAC0096627F /* RxSwift */; };
+		BFDC491925F74BAC0096627F /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = BFDC491825F74BAC0096627F /* RxRelay */; };
+		BFDC491B25F74BAC0096627F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = BFDC491A25F74BAC0096627F /* RxCocoa */; };
+		BFDC491D25F74BAC0096627F /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = BFDC491C25F74BAC0096627F /* RxBlocking */; };
+		BFDC492125F74C500096627F /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC492025F74C500096627F /* ToDo.swift */; };
+		BFDC492725F753ED0096627F /* AddReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC492525F753ED0096627F /* AddReminderViewController.swift */; };
+		BFDC492825F753ED0096627F /* AddReminderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFDC492625F753ED0096627F /* AddReminderVC.xib */; };
+		BFF60B0525F77B7900B75688 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF60B0425F77B7900B75688 /* ServiceProvider.swift */; };
+		BFF60B0A25F84C0C00B75688 /* ToDoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF60B0925F84C0C00B75688 /* ToDoViewModel.swift */; };
+		BFF60B0F25F84C8800B75688 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF60B0E25F84C8800B75688 /* ToDoListViewModel.swift */; };
+		BFF60B1B25F89D9300B75688 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF60B1A25F89D9300B75688 /* WebService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BFDC48DF25F747410096627F /* BlueBirdApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBirdApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDC48E225F747410096627F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BFDC48E425F747410096627F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		BFDC48EB25F747440096627F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFDC48EE25F747440096627F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BFDC48F025F747440096627F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFDC48F925F748BE0096627F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BFDC48FA25F748BE0096627F /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		BFDC490725F74A010096627F /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
+		BFDC490825F74A010096627F /* ToDoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToDoCell.xib; sourceTree = "<group>"; };
+		BFDC492025F74C500096627F /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
+		BFDC492525F753ED0096627F /* AddReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderViewController.swift; sourceTree = "<group>"; };
+		BFDC492625F753ED0096627F /* AddReminderVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddReminderVC.xib; sourceTree = "<group>"; };
+		BFF60B0425F77B7900B75688 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		BFF60B0925F84C0C00B75688 /* ToDoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewModel.swift; sourceTree = "<group>"; };
+		BFF60B0E25F84C8800B75688 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
+		BFF60B1A25F89D9300B75688 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BFDC48DC25F747410096627F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDC491725F74BAC0096627F /* RxSwift in Frameworks */,
+				BFDC491D25F74BAC0096627F /* RxBlocking in Frameworks */,
+				BFDC491325F74B340096627F /* Moya in Frameworks */,
+				BFDC491B25F74BAC0096627F /* RxCocoa in Frameworks */,
+				BFDC491925F74BAC0096627F /* RxRelay in Frameworks */,
+				BFDC490F25F74AB00096627F /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BFDC48D625F747410096627F = {
+			isa = PBXGroup;
+			children = (
+				BFDC48E125F747410096627F /* BlueBirdApp */,
+				BFDC48E025F747410096627F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BFDC48E025F747410096627F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC48DF25F747410096627F /* BlueBirdApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFDC48E125F747410096627F /* BlueBirdApp */ = {
+			isa = PBXGroup;
+			children = (
+				BFF60B0825F84BEE00B75688 /* ViewModel */,
+				BFF60B0325F77B6900B75688 /* Service */,
+				BFDC491F25F74C310096627F /* Model */,
+				BFDC490225F749270096627F /* View Controller */,
+				BFDC490025F7491D0096627F /* View */,
+				BFDC48FF25F748F80096627F /* App */,
+				BFDC48EB25F747440096627F /* Assets.xcassets */,
+				BFDC48ED25F747440096627F /* LaunchScreen.storyboard */,
+				BFDC48F025F747440096627F /* Info.plist */,
+			);
+			path = BlueBirdApp;
+			sourceTree = "<group>";
+		};
+		BFDC48FF25F748F80096627F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC48E225F747410096627F /* AppDelegate.swift */,
+				BFDC48E425F747410096627F /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		BFDC490025F7491D0096627F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC492E25F759230096627F /* AddReminder */,
+				BFDC492F25F7592A0096627F /* Home */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BFDC490225F749270096627F /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC490625F749E40096627F /* Card */,
+				BFDC490425F749DD0096627F /* Home */,
+				BFDC492B25F758EB0096627F /* Add Reminder */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		BFDC490425F749DD0096627F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC48F925F748BE0096627F /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BFDC490625F749E40096627F /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC490725F74A010096627F /* ToDoCell.swift */,
+				BFDC490825F74A010096627F /* ToDoCell.xib */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
+		BFDC491F25F74C310096627F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC492025F74C500096627F /* ToDo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BFDC492B25F758EB0096627F /* Add Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC492525F753ED0096627F /* AddReminderViewController.swift */,
+			);
+			path = "Add Reminder";
+			sourceTree = "<group>";
+		};
+		BFDC492E25F759230096627F /* AddReminder */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC492625F753ED0096627F /* AddReminderVC.xib */,
+			);
+			path = AddReminder;
+			sourceTree = "<group>";
+		};
+		BFDC492F25F7592A0096627F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BFDC48FA25F748BE0096627F /* HomeViewController.xib */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BFF60B0325F77B6900B75688 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				BFF60B0425F77B7900B75688 /* ServiceProvider.swift */,
+				BFF60B1A25F89D9300B75688 /* WebService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		BFF60B0825F84BEE00B75688 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BFF60B0925F84C0C00B75688 /* ToDoViewModel.swift */,
+				BFF60B0E25F84C8800B75688 /* ToDoListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BFDC48DE25F747410096627F /* BlueBirdApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFDC48F325F747440096627F /* Build configuration list for PBXNativeTarget "BlueBirdApp" */;
+			buildPhases = (
+				BFDC48DB25F747410096627F /* Sources */,
+				BFDC48DC25F747410096627F /* Frameworks */,
+				BFDC48DD25F747410096627F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlueBirdApp;
+			packageProductDependencies = (
+				BFDC490E25F74AB00096627F /* Alamofire */,
+				BFDC491225F74B340096627F /* Moya */,
+				BFDC491625F74BAC0096627F /* RxSwift */,
+				BFDC491825F74BAC0096627F /* RxRelay */,
+				BFDC491A25F74BAC0096627F /* RxCocoa */,
+				BFDC491C25F74BAC0096627F /* RxBlocking */,
+			);
+			productName = BlueBirdApp;
+			productReference = BFDC48DF25F747410096627F /* BlueBirdApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDC48D725F747410096627F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					BFDC48DE25F747410096627F = {
+						CreatedOnToolsVersion = 12.3;
+					};
+				};
+			};
+			buildConfigurationList = BFDC48DA25F747410096627F /* Build configuration list for PBXProject "BlueBirdApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BFDC48D625F747410096627F;
+			packageReferences = (
+				BFDC490D25F74AB00096627F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				BFDC491125F74B340096627F /* XCRemoteSwiftPackageReference "Moya" */,
+				BFDC491525F74BAC0096627F /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
+			productRefGroup = BFDC48E025F747410096627F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BFDC48DE25F747410096627F /* BlueBirdApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BFDC48DD25F747410096627F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDC492825F753ED0096627F /* AddReminderVC.xib in Resources */,
+				BFDC48EF25F747440096627F /* LaunchScreen.storyboard in Resources */,
+				BFDC490A25F74A010096627F /* ToDoCell.xib in Resources */,
+				BFDC48EC25F747440096627F /* Assets.xcassets in Resources */,
+				BFDC48FC25F748BE0096627F /* HomeViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BFDC48DB25F747410096627F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFF60B0A25F84C0C00B75688 /* ToDoViewModel.swift in Sources */,
+				BFDC48E325F747410096627F /* AppDelegate.swift in Sources */,
+				BFDC492125F74C500096627F /* ToDo.swift in Sources */,
+				BFF60B0525F77B7900B75688 /* ServiceProvider.swift in Sources */,
+				BFDC490925F74A010096627F /* ToDoCell.swift in Sources */,
+				BFDC48E525F747410096627F /* SceneDelegate.swift in Sources */,
+				BFF60B0F25F84C8800B75688 /* ToDoListViewModel.swift in Sources */,
+				BFDC492725F753ED0096627F /* AddReminderViewController.swift in Sources */,
+				BFF60B1B25F89D9300B75688 /* WebService.swift in Sources */,
+				BFDC48FB25F748BE0096627F /* HomeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BFDC48ED25F747440096627F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFDC48EE25F747440096627F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BFDC48F125F747440096627F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BFDC48F225F747440096627F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BFDC48F425F747440096627F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZAF4VGV8W6;
+				INFOPLIST_FILE = BlueBirdApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.irsyadashari.www.BlueBirdApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFDC48F525F747440096627F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZAF4VGV8W6;
+				INFOPLIST_FILE = BlueBirdApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.irsyadashari.www.BlueBirdApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BFDC48DA25F747410096627F /* Build configuration list for PBXProject "BlueBirdApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDC48F125F747440096627F /* Debug */,
+				BFDC48F225F747440096627F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDC48F325F747440096627F /* Build configuration list for PBXNativeTarget "BlueBirdApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDC48F425F747440096627F /* Debug */,
+				BFDC48F525F747440096627F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BFDC490D25F74AB00096627F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+		BFDC491125F74B340096627F /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.0.1;
+			};
+		};
+		BFDC491525F74BAC0096627F /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BFDC490E25F74AB00096627F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFDC490D25F74AB00096627F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		BFDC491225F74B340096627F /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFDC491125F74B340096627F /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		BFDC491625F74BAC0096627F /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFDC491525F74BAC0096627F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		BFDC491825F74BAC0096627F /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFDC491525F74BAC0096627F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		BFDC491A25F74BAC0096627F /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFDC491525F74BAC0096627F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		BFDC491C25F74BAC0096627F /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFDC491525F74BAC0096627F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BFDC48D725F747410096627F /* Project object */;
+}
