@@ -120,7 +120,10 @@ class ToDoListViewModel {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for : indexPath) as? ToDoCell {
             let todos = _toDos.value
             
-            cell.configure(viewModel: ToDoViewModel(toDo: todos[indexPath.row]))
+            if !todos.isEmpty {
+                cell.configure(viewModel: ToDoViewModel(toDo: todos[indexPath.row]))
+            }
+            
             return cell
         }
         fatalError()

@@ -58,7 +58,6 @@ class HomeViewController: UIViewController {
         print("Menambahkan Item")
         let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
         secondVC.myMode = .create
-//        present(secondVC, animated: true, completion: nil)
         self.navigationController?.pushViewController(secondVC, animated: true)
 
     }

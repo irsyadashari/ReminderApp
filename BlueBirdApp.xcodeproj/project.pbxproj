@@ -30,6 +30,7 @@
 		BFF60B0F25F84C8800B75688 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF60B0E25F84C8800B75688 /* ToDoListViewModel.swift */; };
 		BFF60B1B25F89D9300B75688 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF60B1A25F89D9300B75688 /* WebService.swift */; };
 		BFF60B6025F9C23600B75688 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BFF60B5F25F9C23600B75688 /* IQKeyboardManagerSwift */; };
+		BFF6E5E925FCFC7D00BF5722 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF6E5E825FCFC7D00BF5722 /* String+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		BFF60B0925F84C0C00B75688 /* ToDoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewModel.swift; sourceTree = "<group>"; };
 		BFF60B0E25F84C8800B75688 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		BFF60B1A25F89D9300B75688 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		BFF6E5E825FCFC7D00BF5722 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		BFDC48E125F747410096627F /* BlueBirdApp */ = {
 			isa = PBXGroup;
 			children = (
+				BFF6E5E725FCFC6B00BF5722 /* Custom+Ext */,
 				BFF60B0325F77B6900B75688 /* Service */,
 				BFDC491F25F74C310096627F /* Model */,
 				BFF60B0825F84BEE00B75688 /* ViewModel */,
@@ -199,6 +202,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		BFF6E5E725FCFC6B00BF5722 /* Custom+Ext */ = {
+			isa = PBXGroup;
+			children = (
+				BFF6E5E825FCFC7D00BF5722 /* String+Ext.swift */,
+			);
+			path = "Custom+Ext";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,6 +303,7 @@
 				BFF60B0525F77B7900B75688 /* ServiceProvider.swift in Sources */,
 				BF916B1625FC81610082A016 /* AddReminderViewModel.swift in Sources */,
 				BFDC490925F74A010096627F /* ToDoCell.swift in Sources */,
+				BFF6E5E925FCFC7D00BF5722 /* String+Ext.swift in Sources */,
 				BFDC48E525F747410096627F /* SceneDelegate.swift in Sources */,
 				BFF60B0F25F84C8800B75688 /* ToDoListViewModel.swift in Sources */,
 				BFDC492725F753ED0096627F /* AddReminderViewController.swift in Sources */,
