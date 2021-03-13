@@ -14,12 +14,13 @@ class AddReminderViewModel {
     let descTextPublishSubject = PublishSubject<String>()
     let dateTextPublishSubject = PublishSubject<String>()
     
-    func isValid(title: String, desc: String) -> Observable<Bool> {
+    func isValid(title: String, desc: String, date: String) -> Observable<Bool> {
         
         return Observable.combineLatest(titleTextPublishSubject.asObservable().startWith(title),
-                                 descTextPublishSubject.asObservable().startWith(desc)
-                                 ).map { title, desc in
-                                    return title.count > 0 && desc.count > 0
+                                 descTextPublishSubject.asObservable().startWith(desc),
+                                 dateTextPublishSubject.asObservable().startWith(date)
+                                 ).map { title, desc, date in
+                                    return title.count > 0 && desc.count > 0 && date.count > 0
             }.startWith(false)
         
     }

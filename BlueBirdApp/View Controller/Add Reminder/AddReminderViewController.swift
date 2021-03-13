@@ -9,14 +9,20 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+enum Mode {
+    case edit
+    case create
+}
+
 class AddReminderViewController: UIViewController {
 
     let addreminderVM = AddReminderViewModel()
     
+    var myMode: Mode? = nil
+    
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var descTV: UITextView!
-    @IBOutlet weak var datePickerBtn: UIButton!
-    @IBOutlet weak var dateTimeLabel: UILabel!
+    @IBOutlet weak var dateLabel: UITextField!
     
     @IBOutlet weak var submitBtn: UIButton!
     
@@ -24,18 +30,13 @@ class AddReminderViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
-//
-//    var toDoListViewModel: ToDoListViewModel?
-    var toDoViewModel: ToDoViewModel?
-//
-//    private let toDoListVMSubject = PublishSubject<ToDoListViewModel>()
-//    var toDoListVM: Observable<ToDoListViewModel> {
-//        return toDoListVMSubject.asObservable()
-//    }
-    
     let reminderTitle: BehaviorRelay = BehaviorRelay<String>(value: "")
     let reminderDate: BehaviorRelay = BehaviorRelay<String>(value: "")
     let reminderDesc: BehaviorRelay = BehaviorRelay<String>(value: "")
+    
+    var inputTitle: Observable<String> {
+        return reminderTitle.asObservable()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,51 +47,29 @@ class AddReminderViewController: UIViewController {
 
         descTV.rx.text.map { $0 ?? ""}.bind(to: addreminderVM.descTextPublishSubject).disposed(by: disposeBag)
 
-//        dateTimeLabel.rx.text.map { $0 ?? ""}.bind(to: addreminderVM.dateTextPublishSubject).disposed(by: disposeBag)
-//
-        addreminderVM.isValid(title: reminderTitle.value, desc: reminderDesc.value)
+        
+        addreminderVM.isValid(title: reminderTitle.value, desc: reminderDesc.value, date: reminderDate.value)
         .bind(to: submitBtn.rx.isEnabled)
         .disposed(by: disposeBag)
-//
-        addreminderVM.isValid(title: reminderTitle.value, desc: reminderDesc.value)
+
+        addreminderVM.isValid(title: reminderTitle.value, desc: reminderDesc.value, date: reminderDate.value)
             .map { $0 ? 1 : 0.1 }
             .bind(to: submitBtn.rx.alpha)
             .disposed(by: disposeBag)
+
         
-//        isValid()
-//            .map { $0 ? 1 : 0.1 }
-//            .bind(to: submitBtn.rx.alpha)
-//            .disposed(by: disposeBag)
+        dateLabel.addTarget(self, action: #selector(datePickerShowsup), for: .editingDidBegin)
         
         if reminderDate.value != "" {
             bindValueToWidget()
         }
-//
-//        if reminderDate.value != "" && reminderTitle.value != "" && reminderDesc.value != "" {
-//            toggleSubmitButtonAvailibility(toggle: true)
-//        } else {
-//            toggleSubmitButtonAvailibility(toggle: false)
-//        }
+
        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
-        
-    
     }
-    
-  
-    func isValid() -> Observable<Bool> {
-        
-        return Observable.combineLatest(reminderTitle.asObservable().startWith(""),
-                                        reminderDesc.asObservable().startWith("")).map { title, desc in
-                                            return title.count > 0 && desc.count > 0
-                                        }.startWith(false)
-        
-    }
-    
     
     func bindValueToWidget() {
         reminderTitle
@@ -118,17 +97,16 @@ class AddReminderViewController: UIViewController {
                 date in
                 String(date)
             })
-            .bind(to: dateTimeLabel.rx.text)
+            .bind(to: dateLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
-    @IBAction func datePickerBtnAction(_ sender: Any) {
-        
+    @objc func datePickerShowsup() {
         // Create a DatePicker
         let datePicker: UIDatePicker = UIDatePicker()
         
         // Posiiton date picket within a view
-        datePicker.frame = CGRect(x: 10, y: 50, width: self.view.frame.width, height: 200)
+        datePicker.frame = CGRect(x: 10, y: 80, width: UIScreen.main.bounds.width, height: 300)
         datePicker.preferredDatePickerStyle = .inline
         // Set some of UIDatePicker properties
         datePicker.timeZone = NSTimeZone.local
@@ -140,26 +118,20 @@ class AddReminderViewController: UIViewController {
         
         // Add DataPicker to the view
         self.view.addSubview(datePicker)
-
-        
     }
     
     @objc func datePickerValueChanged(_ sender: UIDatePicker) {
         
-        // Create date formatter
         let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
         
-        // Set date format
-        dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-        
-        // Apply date format
         let selectedDate: String = dateFormatter.string(from: sender.date)
         self.selectedDate = sender.date
         
         sender.setDate(self.selectedDate, animated: false)
+        dateLabel.text = selectedDate
         
-        print("Selected value \(selectedDate)")
-        dateTimeLabel.text = selectedDate
+        addreminderVM.dateTextPublishSubject.onNext(selectedDate)
         sender.removeFromSuperview()
         
     }
@@ -167,10 +139,16 @@ class AddReminderViewController: UIViewController {
     
     @IBAction func submitBtnAction(_ sender: Any) {
         
+        self.reminderTitle.accept(titleTF.text ?? "")
         
-        dismiss(animated: true, completion: {
-            print("sheet dismissed")
-        })
+//        dismiss(animated: true, completion: {
+//            print("sheet dismissed")
+//        })
+        
+        let userDef = UserDefaults.standard
+        userDef.setValue(self.titleTF.text, forKey: "NEW_TITLE")
+        userDef.setValue(self.descTV.text, forKey: "NEW_DESC")
+        userDef.setValue(self.dateLabel.text, forKey: "NEW_DATE")
         
         self.navigationController?.popViewController(animated: true)
     }

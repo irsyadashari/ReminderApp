@@ -79,10 +79,10 @@ class ToDoListViewModel {
         return arr
     }
     
-    func addViewModel(id: Int, title: String, desc: String, dateTime: String) {
+    func addViewModel(title: String, desc: String, dateTime: String) {
         
         var values = self._toDos.value
-        values.append(ToDo(id: id, title: title, desc: desc, dateTime: dateTime))
+        values.append(ToDo(id: Int.random(in: 0...999999), title: title, desc: desc, dateTime: dateTime))
         
         self._toDos.accept(values)
         

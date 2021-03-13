@@ -11,6 +11,8 @@ import RxSwift
 
 class HomeViewController: UIViewController {
     
+    let defaults = UserDefaults.standard
+    
     var toDoListViewModel = ToDoListViewModel()
     
     let tableViewItems = BehaviorRelay.init(value: [])
@@ -32,26 +34,33 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addReminderBtn))
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-//        print("disappear home view")
-    }
     
     override func viewDidAppear(_ animated: Bool) {
 //        print("appear home view")
         
-//        let addReminderVC = self.navigationController?.viewControllers.first as? AddReminderViewController
-         
-//        addReminderVC?.toDoListVM.subscribe(onNext: {[weak self] listViewModel in
-//            print(listViewModel.toDos)
-//        }).disposed(by: disposeBag)
+        guard let newTitle = defaults.string(forKey: "NEW_TITLE") else { return}
+        guard let newDate = defaults.string(forKey: "NEW_DATE") else { return}
+        guard let newDesc = defaults.string(forKey: "NEW_DESC") else { return}
         
+        if newTitle != "" && newDate != "" && newDesc != "" {
+            
+            self.toDoListViewModel.addViewModel(title: newTitle, desc: newDesc, dateTime: newDate)
+            defaults.setValue("", forKey: "NEW_TITLE")
+            defaults.setValue("", forKey: "NEW_DESC")
+            defaults.setValue("", forKey: "NEW_DATE")
+        }
+        
+        print("LISTVM : \(self.toDoListViewModel.getAllToDos())")
+
     }
     
     @objc func addReminderBtn() {
         print("Menambahkan Item")
         let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
-        self.navigationController?.pushViewController(secondVC, animated: true)
+        secondVC.myMode = .create
 //        present(secondVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(secondVC, animated: true)
+
     }
     
     func registerObserver() {
@@ -68,33 +77,6 @@ class HomeViewController: UIViewController {
         
         toDoListViewModel.isFetching.drive(activityIndicator.rx.isHidden).disposed(by: disposeBag)
         
-//        toDosTableView
-//            .rx
-//            .modelSelected(ToDo.self)
-//            .subscribe(onNext: { toDoObject in
-//
-//                let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
-//
-//                secondVC.modalPresentationStyle = .pageSheet
-//
-//                self.present(secondVC, animated: true, completion: nil)
-//
-//
-//            }).disposed(by: disposeBag)
-        
-//
-//        toDosTableView
-//            .rx
-//            .itemSelected
-//            .subscribe(onNext: { indexPath in
-//                let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
-//
-//                secondVC.toDoListViewModel = self.toDoListViewModel
-//                secondVC.itemIndex = indexPath.row
-//                secondVC.modalPresentationStyle = .pageSheet
-//
-//                self.present(secondVC, animated: true, completion: nil)
-//            }).disposed(by: disposeBag)
         
     }
     
@@ -134,13 +116,12 @@ extension HomeViewController: UITableViewDelegate {
         let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
         
         secondVC.modalPresentationStyle = .pageSheet
-//        secondVC.toDoListViewModel = self.toDoListViewModel
-//        secondVC.toDoViewModel = toDoViewModel
         secondVC.reminderTitle.accept(toDoViewModel?.title ?? "")
         secondVC.reminderDate.accept(toDoViewModel?.dateTime ?? "")
         secondVC.reminderDesc.accept(toDoViewModel?.desc ?? "")
-        
+        secondVC.myMode = .edit
         self.navigationController?.pushViewController(secondVC, animated: true)
+        
 //        present(secondVC, animated: true, completion: nil)
         
     }
