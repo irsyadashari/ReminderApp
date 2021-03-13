@@ -9,14 +9,20 @@ import Foundation
 
 struct ToDoViewModel {
     
-    let toDo: ToDo
+    var toDo: ToDo
     
     var id: Int {
         return toDo.id ?? 0
     }
     
     var title: String {
-        return toDo.title ?? "Failed to load title"
+        get{
+            return toDo.title ?? "Failed to load title"
+        }
+        set {
+            toDo.title = newValue 
+        }
+        
     }
     
     var dateTime: String {

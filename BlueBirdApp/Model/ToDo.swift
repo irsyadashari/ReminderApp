@@ -25,9 +25,9 @@ extension ToDoResults: Decodable {
 
 struct ToDo {
     let id: Int?
-    let title: String?
-    let desc: String?
-    let dateTime: String?
+    var title: String?
+    var desc: String?
+    var dateTime: String?
 }
 
 extension ToDo: Decodable {

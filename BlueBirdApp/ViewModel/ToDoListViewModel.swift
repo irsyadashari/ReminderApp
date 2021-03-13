@@ -11,14 +11,13 @@ import RxCocoa
 import UIKit
 
 class ToDoListViewModel {
-    
+        
     private let disposeBag = DisposeBag()
     
     private let _toDos = BehaviorRelay<[ToDo]>(value: [])
     private let _isFetching = BehaviorRelay<Bool>(value: false)
     private let _error = BehaviorRelay<String?>(value: nil)
     
-//    var toDoList: [ToDoViewModel] = [ToDoViewModel]()
     
     var isFetching: Driver<Bool> {
         return _isFetching.asDriver()
@@ -67,6 +66,53 @@ class ToDoListViewModel {
         
         self._isFetching.accept(false)
         
+    }
+    
+    func getAllToDos() -> [ToDoViewModel] {
+        
+        var arr = [ToDoViewModel]()
+        
+        for todo in _toDos.value {
+            arr.append(ToDoViewModel(toDo: todo))
+        }
+        
+        return arr
+    }
+    
+    func addViewModel(id: Int, title: String, desc: String, dateTime: String) {
+        
+        var values = self._toDos.value
+        values.append(ToDo(id: id, title: title, desc: desc, dateTime: dateTime))
+        
+        self._toDos.accept(values)
+        
+    }
+    
+    func deleteViewModelById(with id: Int) {
+        
+        var values = self._toDos.value
+        
+        for item in values {
+            if item.id == id {
+                values = values.filter {$0.id == id}
+            }
+        }
+       
+        self._toDos.accept(values)
+    }
+    
+    func getViewModelAtIndex(at index: Int) -> ToDoViewModel? {
+        
+        guard index < _toDos.value.count else {
+            return nil
+        }
+        
+        return ToDoViewModel(toDo: _toDos.value[index])
+    }
+    
+    func getViewModelById(id: Int) -> ToDoViewModel {
+        let todoVM = _toDos.value.filter {$0.id == id}
+        return ToDoViewModel(toDo: todoVM[0])
     }
     
     func prepareCellForDisplay(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
