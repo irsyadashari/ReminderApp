@@ -33,25 +33,25 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print("disappear home view")
+//        print("disappear home view")
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("appear home view")
+//        print("appear home view")
         
-        let addReminderVC = self.navigationController?.viewControllers.first as? AddReminderViewController
+//        let addReminderVC = self.navigationController?.viewControllers.first as? AddReminderViewController
          
-        addReminderVC?.toDoListVM.subscribe(onNext: {[weak self] listViewModel in
-            print(listViewModel.toDos)
-        }).disposed(by: disposeBag)
+//        addReminderVC?.toDoListVM.subscribe(onNext: {[weak self] listViewModel in
+//            print(listViewModel.toDos)
+//        }).disposed(by: disposeBag)
         
     }
     
     @objc func addReminderBtn() {
         print("Menambahkan Item")
         let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
-        
-        present(secondVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(secondVC, animated: true)
+//        present(secondVC, animated: true, completion: nil)
     }
     
     func registerObserver() {
@@ -134,8 +134,8 @@ extension HomeViewController: UITableViewDelegate {
         let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
         
         secondVC.modalPresentationStyle = .pageSheet
-        secondVC.toDoListViewModel = self.toDoListViewModel
-        secondVC.toDoViewModel = toDoViewModel
+//        secondVC.toDoListViewModel = self.toDoListViewModel
+//        secondVC.toDoViewModel = toDoViewModel
         secondVC.reminderTitle.accept(toDoViewModel?.title ?? "")
         secondVC.reminderDate.accept(toDoViewModel?.dateTime ?? "")
         secondVC.reminderDesc.accept(toDoViewModel?.desc ?? "")

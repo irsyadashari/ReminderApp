@@ -11,6 +11,8 @@ import RxCocoa
 
 class AddReminderViewController: UIViewController {
 
+    let addreminderVM = AddReminderViewModel()
+    
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var descTV: UITextView!
     @IBOutlet weak var datePickerBtn: UIButton!
@@ -22,15 +24,14 @@ class AddReminderViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
-    var isSubmitAvailable = false
-    
-    var toDoListViewModel: ToDoListViewModel?
+//
+//    var toDoListViewModel: ToDoListViewModel?
     var toDoViewModel: ToDoViewModel?
-    
-    private let toDoListVMSubject = PublishSubject<ToDoListViewModel>()
-    var toDoListVM: Observable<ToDoListViewModel> {
-        return toDoListVMSubject.asObservable()
-    }
+//
+//    private let toDoListVMSubject = PublishSubject<ToDoListViewModel>()
+//    var toDoListVM: Observable<ToDoListViewModel> {
+//        return toDoListVMSubject.asObservable()
+//    }
     
     let reminderTitle: BehaviorRelay = BehaviorRelay<String>(value: "")
     let reminderDate: BehaviorRelay = BehaviorRelay<String>(value: "")
@@ -41,12 +42,55 @@ class AddReminderViewController: UIViewController {
         
         setWidgetStyle()
         
+        titleTF.rx.text.map { $0 ?? ""}.bind(to: addreminderVM.titleTextPublishSubject).disposed(by: disposeBag)
+
+        descTV.rx.text.map { $0 ?? ""}.bind(to: addreminderVM.descTextPublishSubject).disposed(by: disposeBag)
+
+//        dateTimeLabel.rx.text.map { $0 ?? ""}.bind(to: addreminderVM.dateTextPublishSubject).disposed(by: disposeBag)
+//
+        addreminderVM.isValid(title: reminderTitle.value, desc: reminderDesc.value)
+        .bind(to: submitBtn.rx.isEnabled)
+        .disposed(by: disposeBag)
+//
+        addreminderVM.isValid(title: reminderTitle.value, desc: reminderDesc.value)
+            .map { $0 ? 1 : 0.1 }
+            .bind(to: submitBtn.rx.alpha)
+            .disposed(by: disposeBag)
+        
+//        isValid()
+//            .map { $0 ? 1 : 0.1 }
+//            .bind(to: submitBtn.rx.alpha)
+//            .disposed(by: disposeBag)
+        
         if reminderDate.value != "" {
             bindValueToWidget()
         }
-       
+//
+//        if reminderDate.value != "" && reminderTitle.value != "" && reminderDesc.value != "" {
+//            toggleSubmitButtonAvailibility(toggle: true)
+//        } else {
+//            toggleSubmitButtonAvailibility(toggle: false)
+//        }
        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        
+    
+    }
+    
+  
+    func isValid() -> Observable<Bool> {
+        
+        return Observable.combineLatest(reminderTitle.asObservable().startWith(""),
+                                        reminderDesc.asObservable().startWith("")).map { title, desc in
+                                            return title.count > 0 && desc.count > 0
+                                        }.startWith(false)
+        
+    }
+    
     
     func bindValueToWidget() {
         reminderTitle
@@ -58,7 +102,7 @@ class AddReminderViewController: UIViewController {
                     .rx
                     .text)
             .disposed(by: disposeBag)
-        
+
         reminderDesc
             .map( {
                 desc in
@@ -68,13 +112,13 @@ class AddReminderViewController: UIViewController {
                     .rx
                     .text)
             .disposed(by: disposeBag)
-        
+
         reminderDate
             .map( {
                 date in
                 String(date)
             })
-            .bind(to: datePickerBtn.rx.title())
+            .bind(to: dateTimeLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
@@ -124,7 +168,6 @@ class AddReminderViewController: UIViewController {
     @IBAction func submitBtnAction(_ sender: Any) {
         
         
-        
         dismiss(animated: true, completion: {
             print("sheet dismissed")
         })
@@ -132,14 +175,13 @@ class AddReminderViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func toggleSubmitButtonAvailibility() {
+    func toggleSubmitButtonAvailibility(toggle: Bool) {
         
-        
-        self.submitBtn.isEnabled.toggle()
-        
-        if isSubmitAvailable {
+        if toggle {
+            self.submitBtn.isEnabled = true
             self.submitBtn.backgroundColor = .blue
         } else {
+            self.submitBtn.isEnabled = false
             self.submitBtn.backgroundColor = .gray
         }
        

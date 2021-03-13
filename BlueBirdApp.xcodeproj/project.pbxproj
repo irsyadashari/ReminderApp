@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF916B1625FC81610082A016 /* AddReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF916B1525FC81610082A016 /* AddReminderViewModel.swift */; };
 		BFDC48E325F747410096627F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC48E225F747410096627F /* AppDelegate.swift */; };
 		BFDC48E525F747410096627F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC48E425F747410096627F /* SceneDelegate.swift */; };
 		BFDC48EC25F747440096627F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFDC48EB25F747440096627F /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF916B1525FC81610082A016 /* AddReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderViewModel.swift; sourceTree = "<group>"; };
 		BFDC48DF25F747410096627F /* BlueBirdApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBirdApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDC48E225F747410096627F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFDC48E425F747410096627F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				BFF60B0925F84C0C00B75688 /* ToDoViewModel.swift */,
 				BFF60B0E25F84C8800B75688 /* ToDoListViewModel.swift */,
+				BF916B1525FC81610082A016 /* AddReminderViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				BFDC48E325F747410096627F /* AppDelegate.swift in Sources */,
 				BFDC492125F74C500096627F /* ToDo.swift in Sources */,
 				BFF60B0525F77B7900B75688 /* ServiceProvider.swift in Sources */,
+				BF916B1625FC81610082A016 /* AddReminderViewModel.swift in Sources */,
 				BFDC490925F74A010096627F /* ToDoCell.swift in Sources */,
 				BFDC48E525F747410096627F /* SceneDelegate.swift in Sources */,
 				BFF60B0F25F84C8800B75688 /* ToDoListViewModel.swift in Sources */,
