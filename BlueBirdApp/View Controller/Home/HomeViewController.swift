@@ -11,13 +11,13 @@ import RxSwift
 
 class HomeViewController: UIViewController {
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     let defaults = UserDefaults.standard
     
     var toDoListViewModel = ToDoListViewModel()
     
     let tableViewItems = BehaviorRelay.init(value: [])
-    
-//    let toDoListViewModel = Observable.just(ToDoListViewModel())
     
     let disposeBag = DisposeBag()
     
@@ -36,26 +36,35 @@ class HomeViewController: UIViewController {
     
     
     override func viewDidAppear(_ animated: Bool) {
-//        print("appear home view")
         
-        guard let newTitle = defaults.string(forKey: "NEW_TITLE") else { return}
-        guard let newDate = defaults.string(forKey: "NEW_DATE") else { return}
-        guard let newDesc = defaults.string(forKey: "NEW_DESC") else { return}
+        // Because this project requires no Storyboard, so I lost access to subscribe the segue movement in this app cycle, so I use UserDefaults as a force solution
         
-        if newTitle != "" && newDate != "" && newDesc != "" {
+        guard let title = defaults.string(forKey: "NEW_TITLE") else { return}
+        guard let date = defaults.string(forKey: "NEW_DATE") else { return}
+        guard let desc = defaults.string(forKey: "NEW_DESC") else { return}
+        guard let mode = defaults.string(forKey: "MODE") else { return}
+        
+        if title != "" && date != "" && desc != "" && mode == "createNew" {
             
-            self.toDoListViewModel.addViewModel(title: newTitle, desc: newDesc, dateTime: newDate)
+            self.toDoListViewModel.addNewObject(title: title, desc: desc, dateTime: date)
             defaults.setValue("", forKey: "NEW_TITLE")
             defaults.setValue("", forKey: "NEW_DESC")
             defaults.setValue("", forKey: "NEW_DATE")
+            defaults.setValue("", forKey: "MODE")
+        } else if mode == "edit" {
+            self.toDoListViewModel.editAnObject(title: title, desc: desc, date: date)
+            
+            defaults.setValue("", forKey: "MODE")
+            self.toDoListViewModel.selectedIndex = nil
         }
         
-        print("LISTVM : \(self.toDoListViewModel.getAllToDos())")
+
 
     }
     
     @objc func addReminderBtn() {
-        print("Menambahkan Item")
+        
+        defaults.setValue("createNew", forKey: "MODE")
         let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
         secondVC.myMode = .create
         self.navigationController?.pushViewController(secondVC, animated: true)
@@ -118,7 +127,9 @@ extension HomeViewController: UITableViewDelegate {
         secondVC.reminderTitle.accept(toDoViewModel?.title ?? "")
         secondVC.reminderDate.accept(toDoViewModel?.dateTime ?? "")
         secondVC.reminderDesc.accept(toDoViewModel?.desc ?? "")
-        secondVC.myMode = .edit
+       
+        defaults.setValue("edit", forKey: "MODE")
+        self.toDoListViewModel.selectedIndex = indexPath.row
         self.navigationController?.pushViewController(secondVC, animated: true)
         
 //        present(secondVC, animated: true, completion: nil)

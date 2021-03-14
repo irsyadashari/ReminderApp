@@ -31,6 +31,7 @@
 		BFF60B1B25F89D9300B75688 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF60B1A25F89D9300B75688 /* WebService.swift */; };
 		BFF60B6025F9C23600B75688 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BFF60B5F25F9C23600B75688 /* IQKeyboardManagerSwift */; };
 		BFF6E5E925FCFC7D00BF5722 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF6E5E825FCFC7D00BF5722 /* String+Ext.swift */; };
+		BFF6E61925FDD6EE00BF5722 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFF6E61725FDD6ED00BF5722 /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		BFF60B0E25F84C8800B75688 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		BFF60B1A25F89D9300B75688 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		BFF6E5E825FCFC7D00BF5722 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		BFF6E61825FDD6ED00BF5722 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BFC48C6125FDE52F0033B70B /* ToDoViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BFF60B0925F84C0C00B75688 /* ToDoViewModel.swift */,
+			);
+			path = ToDoViewModel;
+			sourceTree = "<group>";
+		};
+		BFC48C6325FDE5370033B70B /* ToDoListViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BFF60B0E25F84C8800B75688 /* ToDoListViewModel.swift */,
+			);
+			path = ToDoListViewModel;
+			sourceTree = "<group>";
+		};
+		BFC48C6625FDE5400033B70B /* AddReminderViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BF916B1525FC81610082A016 /* AddReminderViewModel.swift */,
+			);
+			path = AddReminderViewModel;
+			sourceTree = "<group>";
+		};
 		BFDC48D625F747410096627F = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +128,7 @@
 				BFDC48EB25F747440096627F /* Assets.xcassets */,
 				BFDC48ED25F747440096627F /* LaunchScreen.storyboard */,
 				BFDC48F025F747440096627F /* Info.plist */,
+				BFF6E61725FDD6ED00BF5722 /* DataModel.xcdatamodeld */,
 			);
 			path = BlueBirdApp;
 			sourceTree = "<group>";
@@ -195,9 +222,9 @@
 		BFF60B0825F84BEE00B75688 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				BFF60B0925F84C0C00B75688 /* ToDoViewModel.swift */,
-				BFF60B0E25F84C8800B75688 /* ToDoListViewModel.swift */,
-				BF916B1525FC81610082A016 /* AddReminderViewModel.swift */,
+				BFC48C6125FDE52F0033B70B /* ToDoViewModel */,
+				BFC48C6325FDE5370033B70B /* ToDoListViewModel */,
+				BFC48C6625FDE5400033B70B /* AddReminderViewModel */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -307,6 +334,7 @@
 				BFDC48E525F747410096627F /* SceneDelegate.swift in Sources */,
 				BFF60B0F25F84C8800B75688 /* ToDoListViewModel.swift in Sources */,
 				BFDC492725F753ED0096627F /* AddReminderViewController.swift in Sources */,
+				BFF6E61925FDD6EE00BF5722 /* DataModel.xcdatamodeld in Sources */,
 				BFF60B1B25F89D9300B75688 /* WebService.swift in Sources */,
 				BFDC48FB25F748BE0096627F /* HomeViewController.swift in Sources */,
 			);
@@ -575,6 +603,19 @@
 			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		BFF6E61725FDD6ED00BF5722 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFF6E61825FDD6ED00BF5722 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = BFF6E61825FDD6ED00BF5722 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BFDC48D725F747410096627F /* Project object */;
 }
