@@ -9,16 +9,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-enum Mode {
-    case edit
-    case create
-}
-
 class AddReminderViewController: UIViewController {
 
     let addreminderVM = AddReminderViewModel()
-    
-    var myMode: Mode? = nil
     
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var descTV: UITextView!

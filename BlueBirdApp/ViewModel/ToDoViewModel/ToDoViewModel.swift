@@ -16,13 +16,7 @@ struct ToDoViewModel {
     }
     
     var title: String {
-        get{
-            return toDo.title ?? "Failed to load title"
-        }
-        set {
-            toDo.title = newValue 
-        }
-        
+        return toDo.title ?? "Failed to load title"
     }
     
     var dateTime: String {

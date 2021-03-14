@@ -64,12 +64,24 @@ class HomeViewController: UIViewController {
         
         defaults.setValue("createNew", forKey: "MODE")
         let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
-        secondVC.myMode = .create
+        
         self.navigationController?.pushViewController(secondVC, animated: true)
 
     }
     
     func registerObserver() {
+        
+        searchBar.rx.text
+            .asDriver()
+            .drive(toDoListViewModel.searchQuery)
+            .disposed(by: disposeBag)
+        
+        toDoListViewModel.searchQuery.throttle(.milliseconds(1000), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .asObservable().subscribe(onNext: { (text) in
+                self.toDoListViewModel.refreshOnSearch()
+            
+        }).disposed(by: disposeBag)
         
         toDoListViewModel.toDos.drive(onNext: { [unowned self] (todos) in
             self.toDosTableView.reloadData()
@@ -90,8 +102,6 @@ class HomeViewController: UIViewController {
         toDosTableView.dataSource = self
         toDosTableView.register(UINib(nibName: "ToDoCell", bundle: nil), forCellReuseIdentifier: "todoCell")
     }
-    
-    
 }
 
 

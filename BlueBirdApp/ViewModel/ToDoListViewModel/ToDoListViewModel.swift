@@ -12,7 +12,7 @@ import UIKit
 import CoreData
 
 class ToDoListViewModel {
-        
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     private let disposeBag = DisposeBag()
@@ -21,6 +21,8 @@ class ToDoListViewModel {
     private let _isFetching = BehaviorRelay<Bool>(value: false)
     private let _error = BehaviorRelay<String?>(value: nil)
     
+    let searchQuery = BehaviorRelay<String?>(value: "")
+    
     private var itemArray = [ToDoEntity]() // for holding database context value
     
     var isFetching: Driver<Bool> {
@@ -28,13 +30,20 @@ class ToDoListViewModel {
     }
     
     var toDos: Driver<[ToDo]> {
+        
+        
+        
         return _toDos.asDriver()
-            
+        
     }
     
     var error: Driver<String?> {
         return _error.asDriver()
     }
+    
+    //    var searchQuery: Driver<String?> {
+    //        return _searchQuery.asDriver()
+    //    }
     
     var hasError: Bool {
         return _error.value != nil
@@ -48,6 +57,21 @@ class ToDoListViewModel {
     
     init() {
         self.loadToDOs()
+    }
+    
+    func refreshOnSearch(){
+        
+        if searchQuery.value != "" {
+            let todoss = _toDos.value.filter {
+                
+                ($0.title?.lowercased().contains((searchQuery.value?.lowercased())!))!
+            }
+            
+            self._toDos.accept(todoss)
+            
+        } else {
+            loadToDOs()
+        }
     }
     
     private func loadToDOs(with request: NSFetchRequest<ToDoEntity> = ToDoEntity.fetchRequest(), predicate: NSPredicate? = nil) {
@@ -67,7 +91,7 @@ class ToDoListViewModel {
                 self._toDos.accept(todosObjects) // operkan value db ke VM untuk di inflate ke TableView
                 
                 self._isFetching.accept(true)
-               
+                
             }
             
         } catch {
@@ -148,7 +172,7 @@ class ToDoListViewModel {
                 self._isFetching.accept(false)
                 return
             }
-
+            
         }
         
         self._isFetching.accept(false)
@@ -187,7 +211,7 @@ class ToDoListViewModel {
                 values = values.filter {$0.id == id}
             }
         }
-       
+        
         self._toDos.accept(values)
     }
     
