@@ -17,8 +17,6 @@ class HomeViewController: UIViewController {
     
     var toDoListViewModel = ToDoListViewModel()
     
-    let tableViewItems = BehaviorRelay.init(value: [])
-    
     let disposeBag = DisposeBag()
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -84,7 +82,6 @@ class HomeViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         toDoListViewModel.isFetching.drive(activityIndicator.rx.isHidden).disposed(by: disposeBag)
-        
         
     }
     

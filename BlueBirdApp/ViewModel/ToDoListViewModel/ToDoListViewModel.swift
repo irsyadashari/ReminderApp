@@ -29,6 +29,7 @@ class ToDoListViewModel {
     
     var toDos: Driver<[ToDo]> {
         return _toDos.asDriver()
+            
     }
     
     var error: Driver<String?> {
@@ -54,10 +55,9 @@ class ToDoListViewModel {
         do {
             self.itemArray = try context.fetch(request)
             
-            if self.itemArray.isEmpty { // kalo database kosong
-                print("DB KOSONG")
-                self.fetchToDos() // fetch data dari internet
-            } else { // kalo tidak kosong
+            if self.itemArray.isEmpty { 
+                self.fetchToDos()
+            } else {
                 self._isFetching.accept(false)
                 var todosObjects: [ToDo] = [ToDo]()
                 for item in self.itemArray {
@@ -67,7 +67,7 @@ class ToDoListViewModel {
                 self._toDos.accept(todosObjects) // operkan value db ke VM untuk di inflate ke TableView
                 
                 self._isFetching.accept(true)
-                print("ISINYA DATABASE : \(itemArray)")
+               
             }
             
         } catch {
