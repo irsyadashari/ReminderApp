@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var toDosTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var emptyView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,7 @@ class HomeViewController: UIViewController {
             defaults.setValue("", forKey: "NEW_DESC")
             defaults.setValue("", forKey: "NEW_DATE")
             defaults.setValue("", forKey: "MODE")
-        } else if mode == "edit" {
+        } else if title != "" && date != "" && desc != "" && mode == "edit" {
             self.toDoListViewModel.editAnObject(title: title, desc: desc, date: date)
             
             defaults.setValue("", forKey: "MODE")
@@ -76,11 +77,10 @@ class HomeViewController: UIViewController {
             .drive(toDoListViewModel.searchQuery)
             .disposed(by: disposeBag)
         
-        toDoListViewModel.searchQuery.throttle(.milliseconds(1000), scheduler: MainScheduler.instance)
+        toDoListViewModel.searchQuery.throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .asObservable().subscribe(onNext: { (text) in
                 self.toDoListViewModel.refreshOnSearch()
-            
         }).disposed(by: disposeBag)
         
         toDoListViewModel.toDos.drive(onNext: { [unowned self] (todos) in
@@ -94,6 +94,8 @@ class HomeViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         toDoListViewModel.isFetching.drive(activityIndicator.rx.isHidden).disposed(by: disposeBag)
+        
+        toDoListViewModel.isEmpty.drive(emptyView.rx.isHidden).disposed(by: disposeBag)
         
     }
     
