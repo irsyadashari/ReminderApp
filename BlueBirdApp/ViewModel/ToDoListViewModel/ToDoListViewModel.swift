@@ -20,7 +20,7 @@ class ToDoListViewModel {
     private let _toDos = BehaviorRelay<[ToDo]>(value: [])
     private let _isFetching = BehaviorRelay<Bool>(value: false)
     private let _error = BehaviorRelay<String?>(value: nil)
-    private let _isEmpty = BehaviorRelay<Bool>(value: false)
+    private let _isEmpty = BehaviorRelay<Bool>(value: true)
     
     let searchQuery = BehaviorRelay<String?>(value: "")
     
@@ -42,8 +42,6 @@ class ToDoListViewModel {
         return _error.asDriver()
     }
 
-    
-    
     var hasError: Bool {
         return _error.value != nil
     }
@@ -60,53 +58,118 @@ class ToDoListViewModel {
     
     func refreshOnSearch(){
         
-        if searchQuery.value != "" {
-            let todoss = itemArray.filter {
+        if !itemArray.isEmpty {
+            if searchQuery.value != "" {
+                let todoss = itemArray.filter {
+                    
+                    ($0.title?.lowercased().contains((searchQuery.value?.lowercased())!))!
+                }
+                var todosObjects: [ToDo] = [ToDo]()
+                for item in todoss {
+                    todosObjects.append(ToDo(id: Int(item.id), title: item.title, desc: item.desc, dateTime: item.date))
+                }
                 
-                ($0.title?.lowercased().contains((searchQuery.value?.lowercased())!))!
-            }
-            var todosObjects: [ToDo] = [ToDo]()
-            for item in todoss {
-                todosObjects.append(ToDo(id: Int(item.id), title: item.title, desc: item.desc, dateTime: item.date))
-            }
-            
-            self._toDos.accept(todosObjects)
-        } else {
-            var todosObjects: [ToDo] = [ToDo]()
-            for item in self.itemArray {
-                todosObjects.append(ToDo(id: Int(item.id), title: item.title, desc: item.desc, dateTime: item.date))
+                self._toDos.accept(todosObjects)
+            } else {
+                var todosObjects: [ToDo] = [ToDo]()
+                for item in self.itemArray {
+                    todosObjects.append(ToDo(id: Int(item.id), title: item.title, desc: item.desc, dateTime: item.date))
+                }
+                
+                self._toDos.accept(todosObjects)
             }
             
-            self._toDos.accept(todosObjects)
+            if self._toDos.value.isEmpty {
+                self._isEmpty.accept(false)
+            } else {
+                self._isEmpty.accept(true)
+            }
         }
-        
-        if self._toDos.value.isEmpty {
-            self._isEmpty.accept(false)
-        } else {
-            self._isEmpty.accept(true)
-        }
-        
-        sortByDate()
+  
     }
     
     func sortByDate() {
-        print("_toDos.value : \(_toDos.value)")
-        print("SORTKI")
-       
+        if !itemArray.isEmpty && itemArray.count > 1{
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
+            
+            var onComingDate = itemArray.filter( { toDo in
+                let date = dateFormatter.date(from: toDo.date ?? "")
+                let toDay = Date()
+                
+                return date ?? Date() >= toDay
+            })
+            
+            print("onComingDate : \(onComingDate)")
+            
+            if onComingDate.count > 2 {
+                onComingDate = onComingDate.sorted(by: {
+                    dateFormatter.date(from:$0.date ?? "")! <= dateFormatter.date(from:$1.date ?? "")!
+                })
+            }
+            
+            let passedDates = itemArray.filter( { toDo in
+                let date = dateFormatter.date(from: toDo.date ?? "")
+                let toDay = Date()
+                
+                return date ?? Date() < toDay
+            })
+            
+            
+            var sortedArr = [ToDoEntity]()
+            
+            for item in onComingDate {
+                sortedArr.append(item)
+            }
+            for item in passedDates {
+                sortedArr.append(item)
+            }
+            
+            var todosObjects: [ToDo] = [ToDo]()
+            for item in sortedArr {
+                todosObjects.append(ToDo(id: Int(item.id), title: item.title, desc: item.desc, dateTime: item.date))
+            }
+            
+            self._toDos.accept(todosObjects)
+            
+            // ----------------------------------------------------
+            // FOR DB
+            var onComingDateEntity = itemArray.filter( { toDo in
+                let date = dateFormatter.date(from: toDo.date ?? "")
+                let toDay = Date()
+                
+                return date ?? Date() >= toDay
+            })
+            
+            if onComingDateEntity.count > 2 {
+                onComingDateEntity = onComingDateEntity.sorted(by: {
+                    dateFormatter.date(from:$0.date ?? "")! <= dateFormatter.date(from:$1.date ?? "")!
+                })
+            }
+            
+            
+            let passedDatesEntity = itemArray.filter( { toDo in
+                let date = dateFormatter.date(from: toDo.date ?? "")
+                let toDay = Date()
+                
+                return date ?? Date() < toDay
+            })
+            
+            var sortedArrEntity = [ToDoEntity]()
+            
+            
+            for item in  onComingDateEntity {
+                sortedArrEntity.append(item)
+            }
+            for item in passedDatesEntity {
+                sortedArrEntity.append(item)
+            }
+            
+            self.itemArray = sortedArrEntity
+            saveDBContext()
+        }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
-         
-        
-        let todoArr = _toDos.value.sorted( by: { dateFormatter.date(from:$0.dateTime ?? "")! > dateFormatter.date(from:$1.dateTime ?? "")!})
-        
-        print("todoArr : \(todoArr)")
-        
-        self._toDos.accept(todoArr)
-        
-        itemArray = itemArray.sorted(by: { dateFormatter.date(from:$0.date ?? "")! > dateFormatter.date(from:$1.date ?? "")!})
-        
-        saveDBContext()
     }
     
     private func loadToDOs(with request: NSFetchRequest<ToDoEntity> = ToDoEntity.fetchRequest(), predicate: NSPredicate? = nil) {
@@ -114,9 +177,12 @@ class ToDoListViewModel {
         do {
             self.itemArray = try context.fetch(request)
             
-            if self.itemArray.isEmpty { 
+            if self.itemArray.isEmpty {
+                print("DB KOSONG")
                 self.fetchToDos()
+                
             } else {
+                print("DB TIDAK KOSONG")
                 self._isFetching.accept(false)
                 var todosObjects: [ToDo] = [ToDo]()
                 for item in self.itemArray {
@@ -132,7 +198,6 @@ class ToDoListViewModel {
             print("Error fetching data from context \(error)")
         }
         
-        sortByDate()
         
     }
     
@@ -159,7 +224,7 @@ class ToDoListViewModel {
             
             self._toDos.accept(todosObjects)
         }
-        sortByDate()
+
     }
     
     func saveToDB(item: ToDo) {
@@ -172,7 +237,6 @@ class ToDoListViewModel {
         self.itemArray.append(newTodo)
         self.saveDBContext()
         
-        sortByDate()
     }
     
     private func saveDBContext() {
@@ -200,6 +264,7 @@ class ToDoListViewModel {
                     // Creating new object to be saved in database
                     self.saveToDB(item: item)
                 }
+                self._isEmpty.accept(true)
                 self._toDos.accept(todosObjects)
                 
                 
@@ -212,7 +277,7 @@ class ToDoListViewModel {
         }
         
         self._isFetching.accept(false)
-        sortByDate()
+
     }
     
     func getAllToDos() -> [ToDoViewModel] {
@@ -236,6 +301,7 @@ class ToDoListViewModel {
         self._toDos.accept(values)
         
         self.saveToDB(item: newObject)
+ 
     }
     
     func deleteViewModelById(with id: Int) {

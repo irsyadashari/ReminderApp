@@ -45,7 +45,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbn-3M-vRa" userLabel="EmptyView">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbn-3M-vRa" userLabel="EmptyView">
                     <rect key="frame" x="0.0" y="100" width="414" height="762"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6Y-35-m95">

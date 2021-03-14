@@ -57,7 +57,7 @@ class HomeViewController: UIViewController {
             self.toDoListViewModel.selectedIndex = nil
         }
         
-
+        self.toDoListViewModel.sortByDate()
 
     }
     
@@ -80,6 +80,7 @@ class HomeViewController: UIViewController {
         toDoListViewModel.searchQuery.throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .asObservable().subscribe(onNext: { (text) in
+
                 self.toDoListViewModel.refreshOnSearch()
         }).disposed(by: disposeBag)
         
