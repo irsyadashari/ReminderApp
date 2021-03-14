@@ -91,19 +91,24 @@ class ToDoListViewModel {
     func sortByDate() {
         if !itemArray.isEmpty && itemArray.count > 1{
             
+            let calendar = Calendar.current
+            let twoDaysAgo = calendar.date(byAdding: .day, value: -2, to: Date())!
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy hh:mm"
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            
             
             var onComingDate = itemArray.filter( { toDo in
                 let date = dateFormatter.date(from: toDo.date ?? "")
                 let toDay = Date()
                 
-                return date ?? Date() >= toDay
+                return date ?? twoDaysAgo >= toDay
             })
             
             print("onComingDate : \(onComingDate)")
             
-            if onComingDate.count > 2 {
+            if onComingDate.count > 1 {
                 onComingDate = onComingDate.sorted(by: {
                     dateFormatter.date(from:$0.date ?? "")! <= dateFormatter.date(from:$1.date ?? "")!
                 })
@@ -113,7 +118,7 @@ class ToDoListViewModel {
                 let date = dateFormatter.date(from: toDo.date ?? "")
                 let toDay = Date()
                 
-                return date ?? Date() < toDay
+                return date ?? twoDaysAgo < toDay
             })
             
             
@@ -139,12 +144,12 @@ class ToDoListViewModel {
                 let date = dateFormatter.date(from: toDo.date ?? "")
                 let toDay = Date()
                 
-                return date ?? Date() >= toDay
+                return date ?? twoDaysAgo >= toDay
             })
             
-            if onComingDateEntity.count > 2 {
+            if onComingDateEntity.count > 1 {
                 onComingDateEntity = onComingDateEntity.sorted(by: {
-                    dateFormatter.date(from:$0.date ?? "")! <= dateFormatter.date(from:$1.date ?? "")!
+                    dateFormatter.date(from:$0.date ?? "24-03-2020 20:00")! <= dateFormatter.date(from:$1.date ?? "24-03-2020 20:00")!
                 })
             }
             
@@ -153,7 +158,7 @@ class ToDoListViewModel {
                 let date = dateFormatter.date(from: toDo.date ?? "")
                 let toDay = Date()
                 
-                return date ?? Date() < toDay
+                return date ?? twoDaysAgo < toDay
             })
             
             var sortedArrEntity = [ToDoEntity]()
