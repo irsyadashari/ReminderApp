@@ -101,6 +101,8 @@ class AddReminderViewController: UIViewController {
         // Posiiton date picket within a view
         datePicker.frame = CGRect(x: 10, y: 80, width: UIScreen.main.bounds.width, height: 300)
         datePicker.preferredDatePickerStyle = .inline
+        datePicker.minimumDate = Date()
+        
         // Set some of UIDatePicker properties
         datePicker.timeZone = NSTimeZone.local
         datePicker.backgroundColor = UIColor.white
