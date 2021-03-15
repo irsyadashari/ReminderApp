@@ -11,11 +11,11 @@ import RxSwift
 
 class HomeViewController: UIViewController {
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let defaults = UserDefaults.standard
+    
     var toDoListViewModel = ToDoListViewModel()
-    
-    let tableViewItems = BehaviorRelay.init(value: [])
-    
-//    let toDoListViewModel = Observable.just(ToDoListViewModel())
     
     let disposeBag = DisposeBag()
     
@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var toDosTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var emptyView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,29 +33,56 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addReminderBtn))
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        print("disappear home view")
-    }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("appear home view")
         
-        let addReminderVC = self.navigationController?.viewControllers.first as? AddReminderViewController
-         
-        addReminderVC?.toDoListVM.subscribe(onNext: {[weak self] listViewModel in
-            print(listViewModel.toDos)
-        }).disposed(by: disposeBag)
+        // Because this project requires no Storyboard, so I lost access to subscribe the segue movement in this app cycle, so I use UserDefaults as a force solution
         
+        guard let title = defaults.string(forKey: "NEW_TITLE") else { return}
+        guard let date = defaults.string(forKey: "NEW_DATE") else { return}
+        guard let desc = defaults.string(forKey: "NEW_DESC") else { return}
+        guard let mode = defaults.string(forKey: "MODE") else { return}
+        
+        if title != "" && date != "" && desc != "" && mode == "createNew" {
+            
+            self.toDoListViewModel.addNewObject(title: title, desc: desc, dateTime: date)
+            defaults.setValue("", forKey: "NEW_TITLE")
+            defaults.setValue("", forKey: "NEW_DESC")
+            defaults.setValue("", forKey: "NEW_DATE")
+            defaults.setValue("", forKey: "MODE")
+        } else if title != "" && date != "" && desc != "" && mode == "edit" {
+            self.toDoListViewModel.editAnObject(title: title, desc: desc, date: date)
+            
+            defaults.setValue("", forKey: "MODE")
+            self.toDoListViewModel.selectedIndex = nil
+        }
+        
+        self.toDoListViewModel.sortByDate()
+
     }
     
     @objc func addReminderBtn() {
-        print("Menambahkan Item")
+        
+        defaults.setValue("createNew", forKey: "MODE")
         let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
         
-        present(secondVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(secondVC, animated: true)
+
     }
     
     func registerObserver() {
+        
+        searchBar.rx.text
+            .asDriver()
+            .drive(toDoListViewModel.searchQuery)
+            .disposed(by: disposeBag)
+        
+        toDoListViewModel.searchQuery.throttle(.milliseconds(300), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .asObservable().subscribe(onNext: { (text) in
+
+                self.toDoListViewModel.refreshOnSearch()
+        }).disposed(by: disposeBag)
         
         toDoListViewModel.toDos.drive(onNext: { [unowned self] (todos) in
             self.toDosTableView.reloadData()
@@ -68,33 +96,7 @@ class HomeViewController: UIViewController {
         
         toDoListViewModel.isFetching.drive(activityIndicator.rx.isHidden).disposed(by: disposeBag)
         
-//        toDosTableView
-//            .rx
-//            .modelSelected(ToDo.self)
-//            .subscribe(onNext: { toDoObject in
-//
-//                let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
-//
-//                secondVC.modalPresentationStyle = .pageSheet
-//
-//                self.present(secondVC, animated: true, completion: nil)
-//
-//
-//            }).disposed(by: disposeBag)
-        
-//
-//        toDosTableView
-//            .rx
-//            .itemSelected
-//            .subscribe(onNext: { indexPath in
-//                let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
-//
-//                secondVC.toDoListViewModel = self.toDoListViewModel
-//                secondVC.itemIndex = indexPath.row
-//                secondVC.modalPresentationStyle = .pageSheet
-//
-//                self.present(secondVC, animated: true, completion: nil)
-//            }).disposed(by: disposeBag)
+        toDoListViewModel.isEmpty.drive(emptyView.rx.isHidden).disposed(by: disposeBag)
         
     }
     
@@ -103,8 +105,6 @@ class HomeViewController: UIViewController {
         toDosTableView.dataSource = self
         toDosTableView.register(UINib(nibName: "ToDoCell", bundle: nil), forCellReuseIdentifier: "todoCell")
     }
-    
-    
 }
 
 
@@ -134,13 +134,14 @@ extension HomeViewController: UITableViewDelegate {
         let secondVC = AddReminderViewController(nibName: "AddReminderVC", bundle: nil)
         
         secondVC.modalPresentationStyle = .pageSheet
-        secondVC.toDoListViewModel = self.toDoListViewModel
-        secondVC.toDoViewModel = toDoViewModel
         secondVC.reminderTitle.accept(toDoViewModel?.title ?? "")
         secondVC.reminderDate.accept(toDoViewModel?.dateTime ?? "")
         secondVC.reminderDesc.accept(toDoViewModel?.desc ?? "")
-        
+       
+        defaults.setValue("edit", forKey: "MODE")
+        self.toDoListViewModel.selectedIndex = indexPath.row
         self.navigationController?.pushViewController(secondVC, animated: true)
+        
 //        present(secondVC, animated: true, completion: nil)
         
     }

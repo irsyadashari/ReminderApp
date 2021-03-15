@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="BlueBirdApp" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="ade-5K-G3p" id="awj-vZ-UVR"/>
+                <outlet property="emptyView" destination="fbn-3M-vRa" id="ogZ-Ib-wsa"/>
                 <outlet property="infoLabel" destination="p3g-bx-HDw" id="VvE-ws-Mbk"/>
                 <outlet property="searchBar" destination="8oq-78-58b" id="ALk-AB-cUQ"/>
                 <outlet property="toDosTableView" destination="gJ5-73-kQ4" id="kli-3J-9FG"/>
@@ -44,16 +45,57 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbn-3M-vRa" userLabel="EmptyView">
+                    <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6Y-35-m95">
+                            <rect key="frame" x="107" y="281" width="200" height="200"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JdV-hX-uYg">
+                                    <rect key="frame" x="50" y="51" width="100" height="98"/>
+                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="6SG-Ae-zKE"/>
+                                        <constraint firstAttribute="width" constant="100" id="hXb-1X-mCE"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hasil pencarian tidak ditemukan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9H-R0-Nx3">
+                                    <rect key="frame" x="-21.5" y="166" width="243" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="JdV-hX-uYg" firstAttribute="centerY" secondItem="r6Y-35-m95" secondAttribute="centerY" id="3I7-jH-7gu"/>
+                                <constraint firstAttribute="width" constant="200" id="3Nz-yA-9Pg"/>
+                                <constraint firstItem="b9H-R0-Nx3" firstAttribute="centerX" secondItem="JdV-hX-uYg" secondAttribute="centerX" id="BmG-0e-laO"/>
+                                <constraint firstAttribute="height" constant="200" id="Krb-JW-AsE"/>
+                                <constraint firstItem="b9H-R0-Nx3" firstAttribute="top" secondItem="JdV-hX-uYg" secondAttribute="bottom" constant="16" id="fLu-BW-1RN"/>
+                                <constraint firstItem="JdV-hX-uYg" firstAttribute="centerX" secondItem="r6Y-35-m95" secondAttribute="centerX" id="n9f-Xe-KPv"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="r6Y-35-m95" firstAttribute="centerY" secondItem="fbn-3M-vRa" secondAttribute="centerY" id="5dr-G5-pxq"/>
+                        <constraint firstItem="r6Y-35-m95" firstAttribute="centerX" secondItem="fbn-3M-vRa" secondAttribute="centerX" id="c0S-ZE-qFh"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fbn-3M-vRa" secondAttribute="bottom" id="3Qc-3V-gbE"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ade-5K-G3p" secondAttribute="trailing" id="45r-fO-UDy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gJ5-73-kQ4" secondAttribute="trailing" constant="12" id="4rn-NW-rnF"/>
                 <constraint firstItem="p3g-bx-HDw" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="BsR-gM-cyv"/>
                 <constraint firstItem="ade-5K-G3p" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="CtX-A8-ihi"/>
                 <constraint firstItem="gJ5-73-kQ4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="Eaj-i3-Tpy"/>
                 <constraint firstItem="8oq-78-58b" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ltt-Nc-IbR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fbn-3M-vRa" secondAttribute="trailing" id="NlI-xq-8Za"/>
+                <constraint firstItem="fbn-3M-vRa" firstAttribute="top" secondItem="8oq-78-58b" secondAttribute="bottom" id="RYU-XN-cfF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="gJ5-73-kQ4" secondAttribute="bottom" id="V5u-px-7YL"/>
                 <constraint firstItem="p3g-bx-HDw" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="bpN-AY-HvV"/>
                 <constraint firstItem="gJ5-73-kQ4" firstAttribute="top" secondItem="8oq-78-58b" secondAttribute="bottom" id="mMt-JS-K54"/>
@@ -61,11 +103,13 @@
                 <constraint firstItem="8oq-78-58b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sJ0-4j-Aqm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ade-5K-G3p" secondAttribute="bottom" id="tkC-JI-d6D"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8oq-78-58b" secondAttribute="trailing" id="uqG-qg-MgO"/>
+                <constraint firstItem="fbn-3M-vRa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zpJ-jx-gJz"/>
             </constraints>
             <point key="canvasLocation" x="70" y="109"/>
         </view>
     </objects>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -11,8 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddReminderViewController" customModule="BlueBirdApp" customModuleProvider="target">
             <connections>
-                <outlet property="datePickerBtn" destination="QXv-o8-fhk" id="ker-p0-N5g"/>
-                <outlet property="dateTimeLabel" destination="9GW-BL-sdc" id="z1S-ZT-hGD"/>
+                <outlet property="dateLabel" destination="62l-6w-nMt" id="9B6-WC-42U"/>
                 <outlet property="descTV" destination="Jaj-Nh-e1w" id="2ur-h7-nb8"/>
                 <outlet property="submitBtn" destination="HJX-nE-PmM" id="fDb-vo-yJn"/>
                 <outlet property="titleTF" destination="WzD-KQ-D93" id="l56-9f-mDq"/>
@@ -35,7 +34,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Deskripsi" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Jaj-Nh-e1w">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Jaj-Nh-e1w">
                     <rect key="frame" x="16" y="131.5" width="382" height="128"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
@@ -45,6 +44,12 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Pilih Tanggal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="62l-6w-nMt">
+                    <rect key="frame" x="16" y="275.5" width="382" height="23"/>
+                    <color key="textColor" systemColor="linkColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJX-nE-PmM">
                     <rect key="frame" x="16" y="796" width="382" height="50"/>
                     <color key="backgroundColor" name="AccentColor"/>
@@ -58,42 +63,24 @@
                         <action selector="submitBtnAction:" destination="-1" eventType="touchUpInside" id="8J6-v6-Ts9"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXv-o8-fhk">
-                    <rect key="frame" x="16" y="275.5" width="382" height="30"/>
-                    <state key="normal" title="Pilih Tanggal">
-                        <color key="titleColor" name="AccentColor"/>
-                    </state>
-                    <connections>
-                        <action selector="datePickerBtnAction:" destination="-1" eventType="touchUpInside" id="byH-32-S45"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GW-BL-sdc">
-                    <rect key="frame" x="16" y="321.5" width="382" height="0.0"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="lXJ-2T-ul8" firstAttribute="top" secondItem="WzD-KQ-D93" secondAttribute="bottom" constant="19" id="1jg-Tb-KgJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="HJX-nE-PmM" secondAttribute="bottom" constant="16" id="4kV-Ss-v0V"/>
-                <constraint firstItem="9GW-BL-sdc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="5j5-n0-Pfj"/>
+                <constraint firstItem="62l-6w-nMt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="5u7-zh-kRD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HJX-nE-PmM" secondAttribute="trailing" constant="16" id="F90-11-nka"/>
                 <constraint firstItem="Jaj-Nh-e1w" firstAttribute="top" secondItem="lXJ-2T-ul8" secondAttribute="bottom" constant="8" id="FKc-Au-Z4v"/>
                 <constraint firstItem="WzD-KQ-D93" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="QHq-cd-0Fl"/>
                 <constraint firstItem="WzD-KQ-D93" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="SVZ-95-2FY"/>
                 <constraint firstItem="lXJ-2T-ul8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="UYs-cQ-NHT"/>
-                <constraint firstItem="QXv-o8-fhk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="hgR-hz-RRx"/>
-                <constraint firstItem="9GW-BL-sdc" firstAttribute="top" secondItem="QXv-o8-fhk" secondAttribute="bottom" constant="16" id="iv5-fH-1IK"/>
-                <constraint firstItem="QXv-o8-fhk" firstAttribute="top" secondItem="Jaj-Nh-e1w" secondAttribute="bottom" constant="16" id="p8e-01-W8v"/>
+                <constraint firstItem="62l-6w-nMt" firstAttribute="top" secondItem="Jaj-Nh-e1w" secondAttribute="bottom" constant="16" id="dSe-sQ-aYh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="62l-6w-nMt" secondAttribute="trailing" constant="16" id="lBR-zM-oif"/>
                 <constraint firstItem="Jaj-Nh-e1w" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="uta-16-Ctk"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9GW-BL-sdc" secondAttribute="trailing" constant="16" id="wC0-i5-yfK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WzD-KQ-D93" secondAttribute="trailing" constant="16" id="x8m-s4-1Bw"/>
                 <constraint firstItem="HJX-nE-PmM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="xaa-Tx-glq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jaj-Nh-e1w" secondAttribute="trailing" constant="16" id="xde-9b-JQm"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QXv-o8-fhk" secondAttribute="trailing" constant="16" id="xqC-Nm-ugz"/>
             </constraints>
             <point key="canvasLocation" x="-1" y="104"/>
         </view>
@@ -102,6 +89,9 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
